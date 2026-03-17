@@ -42,3 +42,5 @@ drizzle/
 # packages build outputs
 packages/*/dist/
 packages/db/drizzle/
+
+.turbo
