@@ -1,42 +1,63 @@
 # ZCCFoundation
 
-A monorepo containing the ZCCFoundation web application and API backend.
+A Turborepo monorepo containing the ZCCFoundation platform — an olympiad/competition management system with a marketplace and real-time notifications.
 
-## Structure
+## Architecture
 
 ```
 .
 ├── apps/
-│   ├── web/    # Next.js frontend (TypeScript, Tailwind CSS)
-│   └── api/    # NestJS backend (TypeScript, Drizzle ORM, PostgreSQL)
-└── package.json
+│   ├── web/          # Next.js 15 frontend (App Router, TypeScript, Tailwind CSS)
+│   └── api/          # NestJS 11 backend (modular monolith, TypeScript, Drizzle ORM)
+├── packages/
+│   ├── db/           # Shared Drizzle schema + migrations (PostgreSQL)
+│   ├── types/        # Shared TypeScript types and DTOs
+│   └── ui/           # Shared React component library
+├── docker-compose.yml
+└── turbo.json
 ```
+
+### API Modules (`apps/api`)
+
+| Module | Description |
+|--------|-------------|
+| `auth` | Registration and login (JWT planned) |
+| `users` | User management |
+| `olympiad` | Contests, problems, leaderboards |
+| `submission` | Code submissions with async judging queue |
+| `content` | CMS-backed content pages |
+| `marketplace` | Vendor services and orders |
+| `notification` | Real-time WebSocket notifications via Socket.IO |
 
 ## Prerequisites
 
-- Node.js 18+
-- npm 9+
-- PostgreSQL database
+- Node.js 20+
+- npm 10+
+- Docker (for local PostgreSQL and Redis)
 
 ## Getting Started
 
-1. Install dependencies from the root:
+1. Start infrastructure services:
+   ```bash
+   docker compose up -d
+   ```
+
+2. Install dependencies from the root:
    ```bash
    npm install
    ```
 
-2. Copy environment files and fill in your values:
+3. Copy environment files and fill in your values:
    ```bash
    cp apps/api/.env.example apps/api/.env
-   cp apps/web/.env.example apps/web/.env.local
    ```
 
-3. Run database migrations:
+4. Push the database schema:
    ```bash
-   npm run db:push --workspace=apps/api
+   npm run db:push
    ```
 
-4. Start both apps in development mode:
+5. Start all apps in development mode:
    ```bash
    npm run dev
    ```
@@ -44,21 +65,15 @@ A monorepo containing the ZCCFoundation web application and API backend.
    - Web app: http://localhost:3000
    - API: http://localhost:3001
 
-## Scripts
+## Root Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start both apps in development mode |
-| `npm run build` | Build both apps for production |
-| `npm run lint` | Lint both apps |
-
-## API Database Scripts
-
-Run from the repo root with `--workspace=apps/api`:
-
-| Command | Description |
-|---------|-------------|
-| `npm run db:generate --workspace=apps/api` | Generate Drizzle migrations |
-| `npm run db:migrate --workspace=apps/api` | Run migrations |
-| `npm run db:push --workspace=apps/api` | Push schema directly to DB |
-| `npm run db:studio --workspace=apps/api` | Open Drizzle Studio |
+| `npm run dev` | Start all apps and packages in development mode (via Turbo) |
+| `npm run build` | Build all packages and apps for production |
+| `npm run lint` | Lint all packages and apps |
+| `npm run test` | Run tests across all packages |
+| `npm run db:generate` | Generate Drizzle migrations from `packages/db` schema |
+| `npm run db:migrate` | Run pending migrations |
+| `npm run db:push` | Push schema directly to the database |
+| `npm run db:studio` | Open Drizzle Studio |

@@ -1,10 +1,10 @@
 import type { Config } from 'drizzle-kit';
 
 export default {
-  schema: './src/db/schema.ts',
+  schema: './src/schema/index.ts',
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL ?? 'postgresql://postgres:password@localhost:5432/zccfoundation',
+    url: process.env.DATABASE_URL ?? 'postgres://postgres:postgres@localhost:5432/zccfoundation',
   },
 } satisfies Config;

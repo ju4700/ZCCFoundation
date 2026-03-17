@@ -38,3 +38,7 @@ next-env.d.ts
 
 # drizzle
 drizzle/
+
+# packages build outputs
+packages/*/dist/
+packages/db/drizzle/

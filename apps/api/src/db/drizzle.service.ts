@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
 import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
-import * as schema from './schema';
+import * as schema from '@zccfoundation/db';
 
 @Injectable()
 export class DrizzleService implements OnModuleInit, OnModuleDestroy {
@@ -12,7 +12,7 @@ export class DrizzleService implements OnModuleInit, OnModuleDestroy {
   async onModuleInit() {
     const connectionString =
       process.env.DATABASE_URL ??
-      'postgresql://postgres:password@localhost:5432/zccfoundation';
+      'postgres://postgres:postgres@localhost:5432/zccfoundation';
     this.pool = new Pool({ connectionString });
     this.db = drizzle(this.pool, { schema });
     this.logger.log('Database connection initialized');
