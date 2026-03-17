@@ -32,16 +32,11 @@ export class NotificationGateway
   }
 
   @SubscribeMessage('joinContest')
-  handleJoinContest(
+  async handleJoinContest(
     @MessageBody() contestId: number,
     @ConnectedSocket() client: Socket,
   ) {
-    const result = client.join(`contest:${contestId}`);
-    if (result instanceof Promise) {
-      result.catch((err: unknown) => {
-        this.logger.error(`Failed to join contest room: ${String(err)}`);
-      });
-    }
+    await client.join(`contest:${contestId}`);
     return { event: 'joined', contestId };
   }
 
