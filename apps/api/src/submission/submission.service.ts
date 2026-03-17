@@ -22,7 +22,7 @@ export class SubmissionService {
       .insert(submissions)
       .values({ ...data, status: 'pending', score: 0 })
       .returning();
-    await this.queue.addJob(submission.id);
+    this.queue.addJob(submission.id);
     return submission;
   }
 

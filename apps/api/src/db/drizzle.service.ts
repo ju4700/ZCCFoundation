@@ -9,7 +9,7 @@ export class DrizzleService implements OnModuleInit, OnModuleDestroy {
   private pool: Pool;
   public db: NodePgDatabase<typeof schema>;
 
-  async onModuleInit() {
+  onModuleInit() {
     const connectionString =
       process.env.DATABASE_URL ??
       'postgres://postgres:postgres@localhost:5432/zccfoundation';
