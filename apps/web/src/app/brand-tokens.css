@@ -1,0 +1,81 @@
+:root {
+  /* Colors */
+  --color-background-base: #ffffff;
+  --color-background-warm: #fff9f8;
+  --color-background-warm-alt: #fff1ee;
+  --color-text-primary: #202e3f;
+  --color-text-strong: #0f0f0f;
+  --color-text-secondary: #4d5561;
+  --color-text-muted: #6f6f6f;
+  --color-border-soft: #c5c6c6;
+  --color-border-light: #f0f0f0;
+  --color-overlay-white-90: #ffffffe6;
+  --color-alpha-white-60: #fff9;
+  --color-alpha-white-40: #fff6;
+
+  /* Typography */
+  --font-family-display: var(--font-questrial), "Questrial", "Inter", sans-serif;
+  --font-family-body: var(--font-questrial), "Questrial", "Inter", sans-serif;
+  --font-family-ui: var(--font-inter), "Inter", sans-serif;
+  --font-family-accent: var(--font-petrona), "Petrona", Georgia, serif;
+
+  /* Type scale */
+  --font-size-label: 14px;
+  --font-size-body-m: 16px;
+  --font-size-body-l: 18px;
+  --font-size-h4: 24px;
+  --font-size-h3: 28px;
+  --font-size-h2: 36px;
+  --font-size-h1: 50px;
+  --font-size-display-l: 60px;
+  --font-size-display-xl: 74px;
+
+  --line-height-tight: 1.1;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.5;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 30px;
+  --space-8: 40px;
+  --space-10: 70px;
+  --space-11: 80px;
+  --space-13: 130px;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 300ms;
+  --motion-duration-slow: 500ms;
+  --motion-ease-standard: cubic-bezier(.44, 0, .56, 1);
+  --motion-ease-exit: cubic-bezier(.4, 0, 1, 1);
+
+  /* Layout */
+  --container-max: 1345px;
+  --container-gutter-mobile: 20px;
+  --container-gutter-desktop: 30px;
+
+  /* Breakpoints */
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 992px;
+  --breakpoint-lg: 1280px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-size-h1: 36px;
+    --font-size-h2: 28px;
+    --font-size-display-l: 40px;
+    --font-size-display-xl: 46px;
+  }
+}
