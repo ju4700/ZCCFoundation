@@ -20,9 +20,9 @@ export const scholarships = pgTable('scholarships', {
   userId: integer('user_id')
     .references(() => users.id)
     .notNull(),
-  motivationLetter: text('motivation_letter').notNull(),
-  documentUrl: varchar('document_url', { length: 255 }),
   status: scholarshipStatusEnum('status').default('pending').notNull(),
+  resumeUrl: varchar('resume_url', { length: 255 }),
+  coverLetter: text('cover_letter'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
